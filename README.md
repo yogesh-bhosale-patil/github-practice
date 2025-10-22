@@ -14,5 +14,3 @@ docker tag hello-world:latest ghcr.io/$GH_USERNAME/$GH_IMAGE_NAME:$GH_VER
 
 # Push the image
 docker push ghcr.io/$GH_USERNAME/$GH_IMAGE_NAME:$GH_VER
-
-Lets add a reviewer to approve changes
