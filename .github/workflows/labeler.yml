@@ -1,0 +1,27 @@
+name: Documentation Labeler
+
+on:
+  pull_request:
+
+jobs:
+  label-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            documentation:
+              - 'docs/**'
+
+      - name: Add documentation label
+        if: steps.changes.outputs.documentation == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['documentation']
+            })
